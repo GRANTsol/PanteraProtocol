@@ -1,0 +1,72 @@
+/* 🌙 General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+/* 🌎 Global App Styling */
+body {
+  background: #f4f4f8;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex: 1;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* 📌 Global Button Styles */
+button {
+  background: #00a8ff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+  background: #0077cc;
+}
+
+/* 📌 Global Input Styles */
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #00a8ff;
+  outline: none;
+}
+
+/* 🛠️ Utility Classes */
+.hidden {
+  display: none;
+}
+
+.text-center {
+  text-align: center;
+}
