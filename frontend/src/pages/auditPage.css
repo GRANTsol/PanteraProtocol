@@ -1,0 +1,28 @@
+.audit-page {
+  padding: 20px;
+}
+
+h1 {
+  color: #1a1a2e;
+}
+
+.audit-reports {
+  margin-top: 20px;
+}
+
+.audit-reports ul {
+  list-style: none;
+  padding: 0;
+}
+
+.audit-reports li {
+  background: #f8f9fa;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.high-risk {
+  background: #ffcccc;
+  border-left: 5px solid red;
+}
