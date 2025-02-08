@@ -1,0 +1,57 @@
+{
+  "database": {
+    "type": "mongodb",
+    "connectionURI": "mongodb+srv://username:password@cluster0.mongodb.net/panteraProtocol?retryWrites=true&w=majority",
+    "backupEnabled": true,
+    "backupFrequency": "daily",
+    "auditLogsRetention": 180
+  },
+  "collections": {
+    "users": {
+      "indexes": [
+        { "field": "email", "unique": true },
+        { "field": "isAdmin", "type": "boolean" }
+      ],
+      "schema": {
+        "name": "string",
+        "email": "string",
+        "password": "hashed",
+        "role": "enum(admin, auditor, client)",
+        "createdAt": "timestamp"
+      }
+    },
+    "audits": {
+      "indexes": [
+        { "field": "contractId", "unique": true },
+        { "field": "riskScore", "type": "integer" }
+      ],
+      "schema": {
+        "contractId": "string",
+        "submittedBy": "ObjectId(users)",
+        "auditStatus": "enum(pending, completed, failed)",
+        "riskScore": "integer",
+        "vulnerabilities": "array",
+        "createdAt": "timestamp"
+      }
+    },
+    "solanaTransactions": {
+      "indexes": [
+        { "field": "signature", "unique": true },
+        { "field": "riskDetected", "type": "boolean" }
+      ],
+      "schema": {
+        "signature": "string",
+        "analyzedBy": "ObjectId(users)",
+        "riskDetected": "boolean",
+        "riskDetails": "string",
+        "timestamp": "timestamp"
+      }
+    }
+  },
+  "security": {
+    "encryption": "AES-256",
+    "allowRemoteConnections": false,
+    "autoBackup": true,
+    "dataReplication": "enabled"
+  }
+}
