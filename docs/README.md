@@ -1,16 +1,4 @@
-# Re-running the code to generate the .docx file after execution state reset
-
-from docx import Document
-
-# Create a new Word document
-doc = Document()
-
-# Add a title
-doc.add_heading('Pantera Protocol - Documentation', level=1)
-
-# Sections of documentation
-sections = {
-    "README.md": """# 🚀 Pantera Protocol - AI-Powered Smart Contract Audits
+🚀 Pantera Protocol - AI-Powered Smart Contract Audits
 Pantera Protocol is an AI-powered **automated smart contract audit platform** for the **Solana blockchain**.
 
 ## 🌟 Features
