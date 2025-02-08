@@ -1,0 +1,28 @@
+.dashboard-page {
+  padding: 20px;
+}
+
+h1 {
+  color: #1a1a2e;
+}
+
+.recent-audits {
+  margin-top: 20px;
+}
+
+.recent-audits ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recent-audits li {
+  background: #f8f9fa;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.high-risk {
+  background: #ffcccc;
+  border-left: 5px solid red;
+}
