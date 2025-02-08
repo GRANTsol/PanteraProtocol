@@ -1,0 +1,48 @@
+.transaction-page {
+  padding: 20px;
+}
+
+h1 {
+  color: #1a1a2e;
+}
+
+form {
+  margin-top: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+button {
+  background: #00a8ff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: #0077cc;
+}
+
+.analysis-result {
+  margin-top: 20px;
+}
+
+.analysis-result ul {
+  list-style: none;
+  padding: 0;
+}
+
+.analysis-result li {
+  background: #f8f9fa;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
