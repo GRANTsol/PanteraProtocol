@@ -1,0 +1,27 @@
+.not-found-page {
+  text-align: center;
+  padding: 50px;
+}
+
+h1 {
+  color: #d9534f;
+}
+
+p {
+  color: #555;
+  font-size: 18px;
+}
+
+button {
+  background: #00a8ff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+button:hover {
+  background: #0077cc;
+}
