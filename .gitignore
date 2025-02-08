@@ -1,0 +1,16 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn.lock
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Logs & cache
+logs/
+*.log
+cache/
