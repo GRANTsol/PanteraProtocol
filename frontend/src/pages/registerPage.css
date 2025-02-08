@@ -1,0 +1,50 @@
+.register-page {
+  padding: 20px;
+  max-width: 400px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  color: #1a1a2e;
+}
+
+form {
+  margin-top: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+button {
+  background: #00a8ff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+}
+
+button:hover {
+  background: #0077cc;
+}
+
+p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+p a {
+  color: #00a8ff;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
