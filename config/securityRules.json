@@ -1,0 +1,56 @@
+{
+  "auditSettings": {
+    "maxGasUsage": 5000000,
+    "detectReentrancy": true,
+    "detectOverflow": true,
+    "detectUnderflow": true,
+    "detectTxFrontRunning": true,
+    "detectMEV": true,
+    "detectUnauthorizedAccess": true
+  },
+  "riskScoring": {
+    "low": {
+      "threshold": 20,
+      "description": "Minimal risk, optimization recommended."
+    },
+    "medium": {
+      "threshold": 50,
+      "description": "Potential security concerns detected."
+    },
+    "high": {
+      "threshold": 80,
+      "description": "Severe vulnerabilities detected, immediate fix required."
+    },
+    "critical": {
+      "threshold": 95,
+      "description": "Contract is highly vulnerable and exploitable."
+    }
+  },
+  "aiDetectionRules": {
+    "historicalAttackPatterns": true,
+    "mlModelThreshold": 0.85,
+    "dynamicAnalysis": true,
+    "staticAnalysis": true
+  },
+  "complianceChecks": {
+    "kycEnforcement": false,
+    "amlScreening": true,
+    "secRegulations": false,
+    "gdprCompliance": true
+  },
+  "autoMitigation": {
+    "patchReentrancy": true,
+    "suggestGasOptimizations": true,
+    "generateBugBountyReport": true
+  },
+  "solanaSpecificChecks": {
+    "priorityFeeThreshold": 0.02,
+    "detectRentExemptionBypass": true,
+    "detectUncheckedAccountAccess": true
+  },
+  "notificationSettings": {
+    "emailAlerts": true,
+    "webhookAlerts": true,
+    "onChainSecurityNFT": true
+  }
+}
