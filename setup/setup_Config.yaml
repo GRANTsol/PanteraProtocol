@@ -1,0 +1,12 @@
+setup:
+  project_name: "Pantera Protocol"
+  backend:
+    use_database: true
+    database_type: "MongoDB"
+    migrations_required: true
+  frontend:
+    install_dependencies: true
+    use_env_file: true
+  security:
+    enable_logging: true
+    monitor_contracts: true
