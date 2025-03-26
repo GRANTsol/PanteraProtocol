@@ -1,31 +1,61 @@
 // envConfig.js
 import dotenv from 'dotenv';
 import path from 'path';
+import Joi from 'joi';
 
-// Load .env file based on environment
+// Load .env based on environment
 const envPath = path.resolve(process.cwd(), `.env.${process.env.NODE_ENV || 'development'}`);
 dotenv.config({ path: envPath });
 
-// Export all environment variables with fallback defaults
-export const envConfig = {
-  NODE_ENV: process.env.NODE_ENV || 'development',
-  PORT: process.env.PORT || 5000,
+// Define validation schema
+const envSchema = Joi.object({
+  NODE_ENV: Joi.string()
+    .valid('development', 'production', 'test')
+    .default('development'),
+
+  PORT: Joi.number().default(5000),
 
   // Database
-  MONGO_URI: process.env.MONGO_URI || 'mongodb://localhost:27017/pantera',
+  MONGO_URI: Joi.string().uri().required().label('MONGO_URI'),
 
-  // Solana / RPC
-  SOLANA_RPC_URL: process.env.SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com',
+  // Solana
+  SOLANA_RPC_URL: Joi.string().uri().required().label('SOLANA_RPC_URL'),
 
-  // Security / Auth
-  JWT_SECRET: process.env.JWT_SECRET || 'change_this_secret',
-  TOKEN_EXPIRATION: process.env.TOKEN_EXPIRATION || '1h',
+  // Auth
+  JWT_SECRET: Joi.string().min(10).required().label('JWT_SECRET'),
+  TOKEN_EXPIRATION: Joi.string().default('1h'),
 
-  // External Services
-  ALERT_WEBHOOK_URL: process.env.ALERT_WEBHOOK_URL || '',
-  THREAT_FEED_API_KEY: process.env.THREAT_FEED_API_KEY || '',
+  // Threat Intelligence / Alerts
+  ALERT_WEBHOOK_URL: Joi.string().uri().allow('').default(''),
+  THREAT_FEED_API_KEY: Joi.string().allow('').default(''),
 
-  // AI Model Config
-  MODEL_PATH: process.env.MODEL_PATH || './models/defaultModel.pkl',
-  ANOMALY_THRESHOLD: process.env.ANOMALY_THRESHOLD || 0.75
+  // AI Model
+  MODEL_PATH: Joi.string().default('./models/defaultModel.pkl'),
+  ANOMALY_THRESHOLD: Joi.number().min(0).max(1).default(0.75)
+}).unknown(true); // Allow extra vars
+
+// Validate
+const { value: envVars, error } = envSchema.validate(process.env);
+
+if (error) {
+  console.error('❌ Invalid environment configuration:', error.message);
+  process.exit(1); // Stop app if critical config is missing
+}
+
+// Export validated config
+export const envConfig = {
+  NODE_ENV: envVars.NODE_ENV,
+  PORT: envVars.PORT,
+
+  MONGO_URI: envVars.MONGO_URI,
+  SOLANA_RPC_URL: envVars.SOLANA_RPC_URL,
+
+  JWT_SECRET: envVars.JWT_SECRET,
+  TOKEN_EXPIRATION: envVars.TOKEN_EXPIRATION,
+
+  ALERT_WEBHOOK_URL: envVars.ALERT_WEBHOOK_URL,
+  THREAT_FEED_API_KEY: envVars.THREAT_FEED_API_KEY,
+
+  MODEL_PATH: envVars.MODEL_PATH,
+  ANOMALY_THRESHOLD: envVars.ANOMALY_THRESHOLD
 };
