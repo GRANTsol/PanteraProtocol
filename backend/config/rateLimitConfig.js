@@ -1,46 +1,54 @@
 // rateLimitConfig.js
-import { envConfig } from './envConfig.js';
+import { authConfig } from './authConfig.js';
 
 export const rateLimitConfig = {
-  // Global defaults
   global: {
-    windowMs: parseInt(envConfig.RATE_LIMIT_WINDOW_MS || '60000'), // 1 min
-    maxRequests: parseInt(envConfig.RATE_LIMIT_MAX || '30')         // 30 requests per window
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 300, // Max requests per IP per window
+    message: 'Too many requests from this IP, please try again later.',
+    standardHeaders: true,
+    legacyHeaders: false,
   },
 
-  // Role-based overrides
-  roles: {
-    admin: {
-      windowMs: 60000,
-      maxRequests: 100
+  roleBasedLimits: {
+    [authConfig.roles.admin]: {
+      windowMs: 5 * 60 * 1000,
+      max: 1000, // Admins have high bandwidth for ops
     },
-    auditor: {
-      windowMs: 60000,
-      maxRequests: 60
+    [authConfig.roles.auditor]: {
+      windowMs: 10 * 60 * 1000,
+      max: 300, // Auditors run many AI audits
     },
-    user: {
-      windowMs: 60000,
-      maxRequests: 30
+    [authConfig.roles.user]: {
+      windowMs: 10 * 60 * 1000,
+      max: 100,
     },
-    viewer: {
-      windowMs: 60000,
-      maxRequests: 15
+    [authConfig.roles.viewer]: {
+      windowMs: 10 * 60 * 1000,
+      max: 50,
     }
   },
 
-  // Optional: Custom settings per endpoint
-  endpoints: {
-    '/api/audit/scan': {
-      windowMs: 300000, // 5 minutes
-      maxRequests: 3
+  endpointSpecific: {
+    '/api/audit/run': {
+      windowMs: 30 * 60 * 1000, // Heavier endpoint
+      max: 20,
+      message: 'Too many audit scans. Upgrade your plan or wait.'
     },
-    '/api/auth/login': {
-      windowMs: 900000, // 15 minutes
-      maxRequests: 5
+    '/api/threat/intel': {
+      windowMs: 15 * 60 * 1000,
+      max: 100,
     }
   },
 
-  // Whitelist / Blacklist
-  ipWhitelist: (envConfig.IP_WHITELIST || '').split(',').filter(Boolean),
-  ipBlacklist: (envConfig.IP_BLACKLIST || '').split(',').filter(Boolean)
+  burstControl: {
+    enableBurstLimiter: true,
+    burstWindowSeconds: 10,
+    burstMaxRequests: 20
+  },
+
+  logging: {
+    enableRateLimitLogs: true,
+    logThrottleEvents: true
+  }
 };
